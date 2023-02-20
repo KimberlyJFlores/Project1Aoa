@@ -1,6 +1,6 @@
 
 public class Line {
-		Points point1;
+		Points point1; 
 		Points point2;
 		double slope;
 		
