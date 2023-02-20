@@ -64,9 +64,8 @@ public class Line {
 			this.slope = slope;
 		}
 		
-		boolean pointIsAboveLine( Line l, Points p )
+		public String toString()
 		{
-			double yLine = l.getSlope() * p.getxCord() + l.getyIntercept();
-			return p.getyCord() > yLine;
+			return "LINE[ POINT 1: " + this.point1 + " POINT 2: " + this.point2 + " ]";
 		}
 }

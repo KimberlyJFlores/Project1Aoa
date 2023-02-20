@@ -36,5 +36,9 @@ public class Points {
 		return xCord+" ," + yCord;
 	}
 	
-	
+	boolean pointIsAboveLine( Line l )
+	{
+		double yLine = l.getSlope() * this.getxCord() + l.getyIntercept();
+		return this.getyCord() > yLine;
+	}
 }
