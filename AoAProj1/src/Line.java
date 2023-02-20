@@ -3,11 +3,13 @@ public class Line {
 		Points point1;
 		Points point2; 
 		double slope;
+		double yIntercept;
 		
 		public Line(Points point1, Points point2) {
 			this.point1=point1;
 			this.point2=point2;
 			this.setSlope(this.point1, this.point2);
+			this.yIntercept = point1.getyCord() - this.slope * point1.getxCord();
 		}
 		public double getSlope() 
 		{
@@ -43,5 +45,28 @@ public class Line {
 		public void setSlope(Points point1, Points point2) {
 			this.slope = (point2.getyCord() - point1.getyCord() ) / ( point2.getxCord() - point1.getxCord());
 		}
+		/**
+		 * @return the yIntercept
+		 */
+		public double getyIntercept() {
+			return yIntercept;
+		}
+		/**
+		 * @param yIntercept the yIntercept to set
+		 */
+		public void setyIntercept(double yIntercept) {
+			this.yIntercept = yIntercept;
+		}
+		/**
+		 * @param slope the slope to set
+		 */
+		public void setSlope(double slope) {
+			this.slope = slope;
+		}
 		
+		boolean pointIsAboveLine( Line l, Points p )
+		{
+			double yLine = l.getSlope() * p.getxCord() + l.getyIntercept();
+			return p.getyCord() > yLine;
+		}
 }

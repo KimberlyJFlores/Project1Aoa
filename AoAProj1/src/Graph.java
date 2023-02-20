@@ -13,7 +13,6 @@ public class Graph {
 		convexLines = new ArrayList<Line>();
 	}
 	public void setPoints(String fileName) {
-		//TODO: read in all points from CSV FILE
 		Scanner scanIn = null;
 		try {
 			scanIn = new Scanner( new File("data/"+fileName) );
@@ -35,6 +34,7 @@ public class Graph {
 	}
 	public void findConvexHull() {
 		//TODO: write all points that form the convex hull, in counter-clockwise order
+		
 	}	
 	/**
 	 * @return the allPoints
