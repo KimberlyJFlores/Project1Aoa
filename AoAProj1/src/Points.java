@@ -3,8 +3,9 @@ public class Points {
 	double xCord;
 	double yCord;
 	public Points(double x, double y) {
-		this.xCord	= this.yCord;
-	}
+		this.xCord=x;
+		this.yCord=y;
+		}
 	//todo: add functions to solve alg
 	/**
 	 * @return the xCord
@@ -30,7 +31,10 @@ public class Points {
 	public void setyCord(double yCord) {
 		this.yCord = yCord;
 	}
-	
+	public String toString()
+	{
+		return xCord+" ," + yCord;
+	}
 	
 	
 }

@@ -16,7 +16,7 @@ public class Graph {
 		//TODO: read in all points from CSV FILE
 		Scanner scanIn = null;
 		try {
-			scanIn = new Scanner( new File(fileName) );
+			scanIn = new Scanner( new File("data/"+fileName) );
 			//reads in data from a CSV line by line
 			while(scanIn.hasNextLine()) {
 				String nextLine = scanIn.nextLine();
