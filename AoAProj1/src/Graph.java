@@ -55,31 +55,69 @@ public class Graph {
 		if( points.size() == 2 ) /* 2 points left */
 		{
 			ret.add( new Line( points.get(1), points.get(0) ) );
-			System.out.println(ret);
+			//System.out.println(ret);
 			return ret;
 		}
 		ArrayList<Line> leftSide = findConvexHull( new ArrayList<Points>( points.subList(0, points.size()/2) ) ); // left side
 		//System.out.println(leftSide);
 		ArrayList<Line> rightSide = findConvexHull( new ArrayList<Points>( points.subList(points.size()/2, points.size() ) ) ); // left side
 		//System.out.println(rightSide);
+		ArrayList<Line> exp = combineSides(leftSide,rightSide);
 		return null; /* combine sides */
 	}
 	
 	/* TODO: this stuff */
 	public ArrayList<Line> combineSides( ArrayList<Line> leftSide, ArrayList<Line> rightSide )
 	{
+		Line lT = lowerTangent(leftSide,rightSide);
 		return null;
 	}
 	
 	/* TODO: this stuff */
 	public Line lowerTangent( ArrayList<Line> leftSide, ArrayList<Line> rightSide )
 	{
-		Points a = leftSide.get(leftSide.size()-1).point1; /* Rightmost point of a */
-		Points b = leftSide.get(0).point1; /* Leftmost point of b */
-		Line curr = new Line( a,b );
-		return null;
+		int i =0;
+		Points a = leftSide.get(0).point1;
+		for(i = 0; i< leftSide.size()-1;i++) {
+			if(leftSide.get(i).getPoint1().getxCord()>a.getxCord())
+				a=leftSide.get(i).getPoint1();
+		} /* Rightmost point of a */
+		int c = 0;
+		Points b = rightSide.get(c).point1; /* Leftmost point of b */
+		Line lT = new Line(a,b);
+		while(!noPointsBelow(leftSide,lT) /**&& !noPointsBelow(rightSide,lT)**/) {
+			while(!noPointsBelow(leftSide,lT)) {
+				if(i == 0)
+					i=leftSide.size()-1;
+				else
+					i--;
+				lT=new Line(leftSide.get(i).point1,rightSide.get(c).point1);
+			}
+			while(!noPointsBelow(rightSide,lT)) {
+				if(c == rightSide.size()-1)
+					c=0;
+				else
+					c++;
+				lT=new Line(leftSide.get(i).point1,rightSide.get(c).point1);
+			}
+		}
+		System.out.println("Monster equation:"+lT.getPoint1() + "\t"+lT.getPoint2());
+		return lT;
 	}
-	
+	public boolean noPointsBelow(ArrayList<Line> shape,Line tangent) {
+		int i =0;
+		Points test = shape.get(0).point1;
+		for(i=0;i<shape.size()-1;i++) {
+			if(test != tangent.getPoint1() && test != tangent.getPoint2()) {
+				if(test.getyCord() < tangent.getPoint1().getyCord() || test.getyCord() < tangent.getPoint2().getyCord()) {
+					System.out.println(test+"\t"+ tangent.getPoint1()+"\t"+tangent.getPoint2());
+					return false;
+					
+				}
+			}
+		}
+		return true;
+	}
 	/**
 	 * @return the allPoints
 	 */
