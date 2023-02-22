@@ -62,7 +62,7 @@ public class Graph {
 		ArrayList<Line> rightSide = findConvexHull( new ArrayList<Points>( points.subList(points.size()/2, points.size() ) ) ); // left side
 		//System.out.println(rightSide);
 		ArrayList<Line> exp = combineSides(leftSide,rightSide);
-		return null; /* combine sides */
+		return exp; /* combine sides */
 	}
 	
 	/* TODO: this stuff */
@@ -70,7 +70,30 @@ public class Graph {
 	{
 		Line lT = lowerTangent(leftSide,rightSide);
 		Line uT = upperTangent(leftSide,rightSide);
-		return null;
+		ArrayList<Line> combine = new ArrayList<Line>();
+		int i = 0,j = 0;
+		System.out.println(uT);
+		while(i < leftSide.size()) {
+			if(leftSide.get(i).point1 == lT.point1) 
+			{
+				combine.add(lT);
+				while(rightSide.get(j).point1!=lT.point2) {
+					j++;
+				}
+				while(rightSide.get(j).point1 != uT.point2 ) {
+					combine.add(rightSide.get(j));
+					j++;
+				}
+				combine.add(new Line(uT.point2,uT.point1));
+				while(leftSide.get(i).point1 != uT.point1) {
+					i++;
+				}
+			}
+			combine.add(leftSide.get(i));
+			i++;
+		}
+		System.out.println("Final"+combine);
+		return combine;
 	}
 	
 	/* TODO: this stuff */
@@ -85,7 +108,6 @@ public class Graph {
 		int c = 0;
 		Points b = rightSide.get(c).point1; /* Leftmost point of b */
 		Line lT = new Line(a,b);
-		System.out.println("Start: "+lT + "\t" + lT.getSlope() + "\t"+lT.getyIntercept());
 		while(isLowerTangent(rightSide,lT)==false || isLowerTangent(leftSide,lT)==false ) {
 			while(isLowerTangent(leftSide,lT)==false) {
 				if(i == 0)
@@ -104,7 +126,6 @@ public class Graph {
 				lT = new Line(a,b);
 			}
 		}
-		System.out.println("Final: "+lT);
 		
 		return lT;
 	}
@@ -129,7 +150,7 @@ public class Graph {
 		int c = 0;
 		Points b = rightSide.get(c).point1; /* Leftmost point of b */
 		Line lT = new Line(a,b);
-		System.out.println("Upper Start: "+lT + "\t" + lT.getSlope() + "\t"+lT.getyIntercept());
+		//System.out.println("Upper Start: "+lT + "\t" + lT.getSlope() + "\t"+lT.getyIntercept());
 		while(isUpperTangent(rightSide,lT)==false || isUpperTangent(leftSide,lT)==false ) {
 			while(isUpperTangent(leftSide,lT)==false) {
 				if(i == 0)
@@ -148,7 +169,7 @@ public class Graph {
 				lT = new Line(a,b);
 			}
 		}
-		System.out.println("Upper Final: "+lT);
+		//System.out.println("Upper Final: "+lT);
 		
 		return lT;
 	}

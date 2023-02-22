@@ -5,7 +5,8 @@ public class Main {
 		Graph graph = new Graph();
 		graph.setPoints("input.csv");
 		//System.out.println(graph.getAllPoints());
-		graph.findConvexHull(graph.allPoints);
+		System.out.println(graph.findConvexHull(graph.allPoints));
+		
 	}
 
 }
