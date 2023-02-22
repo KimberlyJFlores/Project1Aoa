@@ -73,27 +73,9 @@ public class Graph {
 		ArrayList<Line> combine = new ArrayList<Line>();
 		int i = 0,j = 0;
 		System.out.println(uT);
-		while(i < leftSide.size()) {
-			if(leftSide.get(i).point1 == lT.point1) 
-			{
-				combine.add(lT);
-				while(rightSide.get(j).point1!=lT.point2) {
-					j++;
-				}
-				while(rightSide.get(j).point1 != uT.point2 ) {
-					combine.add(rightSide.get(j));
-					j++;
-				}
-				combine.add(new Line(uT.point2,uT.point1));
-				while(leftSide.get(i).point1 != uT.point1) {
-					i++;
-				}
-			}
-			combine.add(leftSide.get(i));
-			i++;
-		}
+		
 		System.out.println("Final"+combine);
-		return combine;
+		return null;
 	}
 	
 	/* TODO: this stuff */
