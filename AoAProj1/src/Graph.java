@@ -49,7 +49,6 @@ public class Graph {
 				ret.add( new Line( points.get(2), points.get(1) ) );
 				ret.add( new Line( points.get(1), points.get(0) ) ); /* connect bottom to right point */
 			}
-			System.out.println(ret);
 			return ret;
 		}
 		if( points.size() == 2 ) /* 2 points left */
@@ -85,38 +84,42 @@ public class Graph {
 		int c = 0;
 		Points b = rightSide.get(c).point1; /* Leftmost point of b */
 		Line lT = new Line(a,b);
-		while(!noPointsBelow(leftSide,lT) /**&& !noPointsBelow(rightSide,lT)**/) {
-			while(!noPointsBelow(leftSide,lT)) {
+		System.out.println("Start: "+lT);
+		while(!isLowerTangent(rightSide,lT) && !isLowerTangent(leftSide,lT) ) {
+			while(!isLowerTangent(leftSide,lT)) {
 				if(i == 0)
 					i=leftSide.size()-1;
 				else
 					i--;
-				lT=new Line(leftSide.get(i).point1,rightSide.get(c).point1);
+				a=leftSide.get(i).getPoint1();
+				lT = new Line(a,b);
 			}
-			while(!noPointsBelow(rightSide,lT)) {
-				if(c == rightSide.size()-1)
+			while(!isLowerTangent(rightSide,lT)) {
+				if(c == leftSide.size()-1)
 					c=0;
 				else
 					c++;
-				lT=new Line(leftSide.get(i).point1,rightSide.get(c).point1);
+				b = rightSide.get(c).getPoint1();
+				lT = new Line(a,b);
 			}
 		}
-		System.out.println("Monster equation:"+lT.getPoint1() + "\t"+lT.getPoint2());
+		System.out.println("Final: "+lT);
+		
 		return lT;
 	}
-	public boolean noPointsBelow(ArrayList<Line> shape,Line tangent) {
-		int i =0;
-		Points test = shape.get(0).point1;
+	public boolean isLowerTangent( ArrayList<Line> shape, Line tan) {
+		int i = 0;
+		Points p=shape.get(i).getPoint1();
 		for(i=0;i<shape.size()-1;i++) {
-			if(test != tangent.getPoint1() && test != tangent.getPoint2()) {
-				if(test.getyCord() < tangent.getPoint1().getyCord() || test.getyCord() < tangent.getPoint2().getyCord()) {
-					System.out.println(test+"\t"+ tangent.getPoint1()+"\t"+tangent.getPoint2());
-					return false;
-					
-				}
-			}
+			p=shape.get(i).getPoint1();
+			if(pointAboveLine(tan,p)==false)
+				return false;
 		}
 		return true;
+	}
+	public boolean pointAboveLine(Line l, Points p) {
+		double lineY = l.getSlope()*p.getxCord()+l.getyIntercept();
+		return p.getyCord()>lineY;
 	}
 	/**
 	 * @return the allPoints

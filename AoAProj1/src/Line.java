@@ -43,7 +43,7 @@ public class Line {
 		 * @param slope the slope to set
 		 */
 		public void setSlope(Points point1, Points point2) {
-			this.slope = (point2.getyCord() - point1.getyCord() ) / ( point2.getxCord() - point1.getxCord());
+			this.slope = (point1.getyCord() - point2.getyCord() ) / ( point1.getxCord() - point2.getxCord());
 		}
 		/**
 		 * @return the yIntercept
