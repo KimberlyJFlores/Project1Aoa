@@ -74,6 +74,46 @@ public class Graph {
 		int i = 0,j = 0;
 		System.out.println(uT);
 		
+		/* Tracing to get to uT pt1 */
+		while( leftSide.get(i).point1 != uT.point1 )
+		{
+			if( i == leftSide.size() )
+				i = 0;
+			System.out.println("infinite loop 1");
+			i++;
+		}
+		/* Now at uT */
+		while( leftSide.get(i).point1 != lT.point1 )
+		{
+			if( i == leftSide.size() )
+				i = 0;
+			combine.add(leftSide.get(i));
+			System.out.println("infinite loop 2");
+			i++;
+
+		}
+		combine.add(lT);
+		
+		/* going to shape b */
+		j = 0;
+		while( rightSide.get(j).point1 != lT.point2 )
+		{
+			if( j == leftSide.size() )
+				j = 0;
+			System.out.println("infinite loop 3");
+			j++;
+		}
+		/* now at pt2 lT */
+		while( rightSide.get(j).point1 != uT.point2 )
+		{
+			if( j == leftSide.size() )
+				j = 0;
+			combine.add(rightSide.get(j));
+			System.out.println("infinite loop 4");
+			j++;
+		}
+		combine.add(uT);
+		
 		System.out.println("Final"+combine);
 		return null;
 	}
