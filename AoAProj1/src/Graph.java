@@ -84,9 +84,11 @@ public class Graph {
 		int c = 0;
 		Points b = rightSide.get(c).point1; /* Leftmost point of b */
 		Line lT = new Line(a,b);
-		System.out.println("Start: "+lT);
-		while(!isLowerTangent(rightSide,lT) && !isLowerTangent(leftSide,lT) ) {
-			while(!isLowerTangent(leftSide,lT)) {
+		System.out.println("Start: "+lT + "\t" + lT.getSlope() + "\t"+lT.getyIntercept());
+		System.out.println(isLowerTangent(leftSide,lT));
+		System.out.println(isLowerTangent(rightSide,lT));
+		while(isLowerTangent(rightSide,lT)==false || isLowerTangent(leftSide,lT)==false ) {
+			while(isLowerTangent(leftSide,lT)==false) {
 				if(i == 0)
 					i=leftSide.size()-1;
 				else
@@ -94,7 +96,8 @@ public class Graph {
 				a=leftSide.get(i).getPoint1();
 				lT = new Line(a,b);
 			}
-			while(!isLowerTangent(rightSide,lT)) {
+			while(isLowerTangent(rightSide,lT)==false) {
+				System.out.println("test1");
 				if(c == leftSide.size()-1)
 					c=0;
 				else
@@ -112,7 +115,7 @@ public class Graph {
 		Points p=shape.get(i).getPoint1();
 		for(i=0;i<shape.size()-1;i++) {
 			p=shape.get(i).getPoint1();
-			if(pointAboveLine(tan,p)==false)
+			if(p != tan.getPoint1()&& p!=tan.getPoint2()&&pointAboveLine(tan,p)==false)
 				return false;
 		}
 		return true;
