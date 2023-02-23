@@ -35,7 +35,7 @@ public class Points {
 	}
 	public String toString()
 	{
-		return "excelNum: " + excelNum + " " + xCord+" ," + yCord;
+		return "excelNum: " + excelNum + " " + xCord+" ," + yCord + "";
 	}
 	
 	/**
