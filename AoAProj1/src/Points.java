@@ -2,9 +2,11 @@
 public class Points {
 	double xCord;
 	double yCord;
-	public Points(double x, double y) {
+	int excelNum;
+	public Points(double x, double y, int excelNum) {
 		this.xCord=x;
 		this.yCord=y;
+		this.excelNum = excelNum;
 		}
 	//todo: add functions to solve alg
 	/**
@@ -33,9 +35,21 @@ public class Points {
 	}
 	public String toString()
 	{
-		return xCord+" ," + yCord;
+		return "excelNum: " + excelNum + " " + xCord+" ," + yCord;
 	}
 	
+	/**
+	 * @return the excelNum
+	 */
+	public int getExcelNum() {
+		return excelNum;
+	}
+	/**
+	 * @param excelNum the excelNum to set
+	 */
+	public void setExcelNum(int excelNum) {
+		this.excelNum = excelNum;
+	}
 	boolean pointIsAboveLine( Line l )
 	{
 		double yLine = l.getSlope() * this.getxCord() + l.getyIntercept();

@@ -14,15 +14,17 @@ public class Graph {
 	}
 	public void setPoints(String fileName) {
 		Scanner scanIn = null;
+		int rowNum = 0;
 		try {
 			scanIn = new Scanner( new File("data/"+fileName) );
 			//reads in data from a CSV line by line
 			while(scanIn.hasNextLine()) {
 				String nextLine = scanIn.nextLine();
 				if(nextLine != null) {
+					rowNum++;
 					String[] tokens = nextLine.split(",");
 					Points newPoint;
-					newPoint = new Points(Double.parseDouble(tokens[0]),Double.parseDouble(tokens[1]));
+					newPoint = new Points(Double.parseDouble(tokens[0]),Double.parseDouble(tokens[1]), rowNum);
 					allPoints.add(newPoint);
 				}
 				
@@ -218,4 +220,13 @@ public class Graph {
 		this.allPoints = allPoints;
 	}
 	
+	public String toString()
+	{
+		String ret = "";
+		for( Line line : this.convexLines )
+		{
+			ret += line + "\n";
+		}
+		return ret;
+	}
 }

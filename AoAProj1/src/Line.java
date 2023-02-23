@@ -66,6 +66,6 @@ public class Line {
 		
 		public String toString()
 		{
-			return "LINE[ POINT 1: " + this.point1 + " POINT 2: " + this.point2 + " ]";
+			return "LINE[ POINT 1: " + this.point1 + "\tPOINT 2: " + this.point2 + " ]\n";
 		}
 }
