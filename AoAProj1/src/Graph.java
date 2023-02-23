@@ -72,24 +72,20 @@ public class Graph {
 		Line uT = upperTangent(leftSide,rightSide);
 		ArrayList<Line> combine = new ArrayList<Line>();
 		int i = 0,j = 0;
-		System.out.println(uT);
-		
 		/* Tracing to get to uT pt1 */
 		while( leftSide.get(i).point1 != uT.point1 )
 		{
-			if( i == leftSide.size() )
-				i = 0;
-			System.out.println("infinite loop 1");
 			i++;
 		}
 		/* Now at uT */
+		if( i == leftSide.size() )
+			i = 0;
 		while( leftSide.get(i).point1 != lT.point1 )
 		{
+			combine.add(leftSide.get(i));
+			i++;
 			if( i == leftSide.size() )
 				i = 0;
-			combine.add(leftSide.get(i));
-			System.out.println("infinite loop 2");
-			i++;
 
 		}
 		combine.add(lT);
@@ -98,24 +94,22 @@ public class Graph {
 		j = 0;
 		while( rightSide.get(j).point1 != lT.point2 )
 		{
-			if( j == leftSide.size() )
-				j = 0;
-			System.out.println("infinite loop 3");
 			j++;
+			
 		}
+		if( j == rightSide.size() )
+			j = 0;
 		/* now at pt2 lT */
 		while( rightSide.get(j).point1 != uT.point2 )
 		{
-			if( j == leftSide.size() )
-				j = 0;
 			combine.add(rightSide.get(j));
-			System.out.println("infinite loop 4");
 			j++;
+			if( j == rightSide.size() )
+				j = 0;
 		}
-		combine.add(uT);
+		combine.add(new Line(uT.getPoint2(),uT.getPoint1()));
 		
-		System.out.println("Final"+combine);
-		return null;
+		return combine;
 	}
 	
 	/* TODO: this stuff */
@@ -148,7 +142,6 @@ public class Graph {
 				lT = new Line(a,b);
 			}
 		}
-		
 		return lT;
 	}
 	public boolean isLowerTangent( ArrayList<Line> shape, Line tan) {
@@ -183,13 +176,15 @@ public class Graph {
 				lT = new Line(a,b);
 			}
 			while(isUpperTangent(rightSide,lT)==false) {
-				if(c == leftSide.size()-1)
+				if(c == leftSide.size())
 					c=0;
 				else
 					c++;
 				b = rightSide.get(c).getPoint1();
 				lT = new Line(a,b);
+				
 			}
+
 		}
 		//System.out.println("Upper Final: "+lT);
 		
